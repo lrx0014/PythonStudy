@@ -5,12 +5,15 @@ _first = myarr[0]
 _last = myarr[len(myarr) - 1]
 
 
-def timer(func, arr):
+def timer(func, n, arr):
     start = time.time()
-    func(arr)
+    i = n
+    while i > 0:
+        func(arr[:])
+        i = i - 1
     end = time.time()
     _name = getattr(func, '__name__')
-    _time = end - start
+    _time = '%.5f' % (end - start)
     print('{:<10}:{time} => [{first},...,{last}]'.format(
         _name, time=_time, first=_first, last=_last))
 
@@ -65,13 +68,14 @@ def abs_genfun(arr):
         yield abs(n)
 
 
-timer(add_for, myarr[:])
-timer(abs_for, myarr[:])
-timer(add_comp, myarr[:])
-timer(abs_comp, myarr[:])
-timer(add_map, myarr[:])
-timer(abs_map, myarr[:])
-timer(add_gen, myarr[:])
-timer(abs_gen, myarr[:])
-timer(add_genfun, myarr[:])
-timer(abs_genfun, myarr[:])
+n = 10
+timer(add_for, n, myarr[:])
+timer(abs_for, n, myarr[:])
+timer(add_comp, n, myarr[:])
+timer(abs_comp, n, myarr[:])
+timer(add_map, n, myarr[:])
+timer(abs_map, n, myarr[:])
+timer(add_gen, n, myarr[:])
+timer(abs_gen, n, myarr[:])
+timer(add_genfun, n, myarr[:])
+timer(abs_genfun, n, myarr[:])
