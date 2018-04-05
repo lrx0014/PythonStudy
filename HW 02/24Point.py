@@ -2,6 +2,7 @@ import itertools
 import random
 
 
+# 洗牌函数
 def shuffle(n, m=-1):
     if m == -1:
         m = n
@@ -14,12 +15,14 @@ def shuffle(n, m=-1):
     return [_list[ind] for ind in range(n) if ind >= 0 and ind < m]
 
 
+# 获取随机的四张牌
 def AquireCards():
     _card = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10] * 4
     _card_shu = shuffle(52, 4)
     return [_card[ind] for ind in _card_shu]
 
 
+# 通过排列组合permutations获取所有可能的表达式
 def TryExpressions(_cards, ops):
     # expr = []
     try:
@@ -35,6 +38,7 @@ def TryExpressions(_cards, ops):
         pass
 
 
+# 遍历所有表达式判断是否能够凑出24点
 def GetResult(expr, isPrint=False):
     opm = {
         '+': lambda a, b: a + b,
@@ -64,12 +68,16 @@ def GetResult(expr, isPrint=False):
 
 if __name__ == '__main__':
     _cards = AquireCards()
-    print(_cards)
+    print('随机生成四张牌：', _cards)
     ops = itertools.combinations_with_replacement('+-*/', 3)
     allExpr = TryExpressions(_cards, ops)
+    isWin = False
     for expr in allExpr:
         result = GetResult(list(expr))
         if result and result == 24:
             GetResult(list(expr), True)
-            print('YOU WIN!!')
+            print('你赢了!!')
+            isWin = True
             break
+    if isWin is False:
+        print('无法凑出24点！！')

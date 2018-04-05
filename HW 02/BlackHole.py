@@ -13,5 +13,6 @@ def BlackHole(n):
     return result
 
 
-for n in BlackHole(3):
+b = input("请输入黑洞数的位数：")
+for n in BlackHole(int(b)):
     print(n)
